@@ -11,6 +11,10 @@ class Circle {
         this.value = value;
     }
 
+    function test(){
+        
+    }
+
     setColor() {
         if (this.value == 0) {
             return "white";
