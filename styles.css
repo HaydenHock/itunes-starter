@@ -1,0 +1,44 @@
+* {
+    font-family: sans-serif;
+    padding: 10px;
+    background: lightskyblue;
+}
+
+canvas {
+    border: 1px black solid;
+    position: relative;
+    bottom: 100px;
+    left: 100px;
+    top: 10px;
+}
+
+
+
+
+button {
+    background: white;
+    color: black;
+    left: 100px;
+}
+
+#coord {
+    position: relative;
+    left: 100px;
+    top:0px;
+}
+
+p {
+    position: relative;
+    left: 375px;
+    bottom: 55px;
+}
+
+#vert {
+    position: relative;
+    bottom:420px;
+}
+
+td {
+    padding: 22px;
+}
+
