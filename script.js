@@ -11,9 +11,7 @@ class Circle {
         this.value = value;
     }
 
-    function test(){
-        
-    }
+    
 
     setColor() {
         if (this.value == 0) {
@@ -47,43 +45,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     class GameBoard {
         constructor(circles) {
-            // Deep copy of circle values (0: empty, 1: red, 2: blue)
-            this.grid = Array(6).fill(null).map((_, row) => 
-                Array(7).fill(null).map((_, col) => 
-                    circles[row * 7 + col].value
-                )
-            );
+            if (circles && circles.length > 0) {
+                // Build a 6x7 grid based on the circle values.
+                // Here, row 0 is the bottom and row 5 is the top.
+                this.grid = Array(6).fill(null).map((_, row) =>
+                    Array(7).fill(null).map((_, col) =>
+                        circles[row * 7 + col].value
+                    )
+                );
+            } else {
+                // Create an empty board when no circles are provided
+                this.grid = Array(6).fill(null).map(() => Array(7).fill(0));
+            }
         }
     
         clone() {
+            // Create a new board without circles, then copy the grid.
             const newBoard = new GameBoard([]);
             newBoard.grid = this.grid.map(row => row.slice());
             return newBoard;
         }
     
+        // A column is valid if the top cell (row 5) is empty.
         getValidMoves() {
             const moves = [];
             for (let col = 0; col < 7; col++) {
-                if (this.grid[0][col] === 0) moves.push(col);
+                if (this.grid[5][col] === 0) moves.push(col);
             }
             return moves;
         }
     
+        // Drop the piece into the lowest available spot (row 0 upward)
         makeMove(col, player) {
-            for (let row = 5; row >= 0; row--) {
+            for (let row = 0; row < 6; row++) {
                 if (this.grid[row][col] === 0) {
                     this.grid[row][col] = player;
                     return true;
                 }
             }
-            return false; // column full
+            return false; // column is full
         }
     
         isWinning(player) {
             const grid = this.grid;
             for (let row = 0; row < 6; row++) {
                 for (let col = 0; col < 7; col++) {
-                    // Horizontal
+                    // Horizontal win check
                     if (col + 3 < 7 &&
                         grid[row][col] === player &&
                         grid[row][col + 1] === player &&
@@ -91,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         grid[row][col + 3] === player)
                         return true;
     
-                    // Vertical
+                    // Vertical win check
                     if (row + 3 < 6 &&
                         grid[row][col] === player &&
                         grid[row + 1][col] === player &&
@@ -99,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         grid[row + 3][col] === player)
                         return true;
     
-                    // Diagonal /
+                    // Diagonal win check (bottom-left to top-right)
                     if (row + 3 < 6 && col - 3 >= 0 &&
                         grid[row][col] === player &&
                         grid[row + 1][col - 1] === player &&
@@ -107,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         grid[row + 3][col - 3] === player)
                         return true;
     
-                    // Diagonal \
+                    // Diagonal win check (top-left to bottom-right)
                     if (row + 3 < 6 && col + 3 < 7 &&
                         grid[row][col] === player &&
                         grid[row + 1][col + 1] === player &&
@@ -130,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return this.getValidMoves().length === 0;
         }
     }
+    
     
 
     function createCircles() {
@@ -207,6 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
         checkWin();
         if (win === 1) {
             document.getElementById("output").innerText = "Player " + selectPlayer + " wins!";
+            for (var i = 0; i < 42; i++) {
+                updateCircle(i, selectPlayer);
+            }
             return;
         }
         // Update output after human move
@@ -320,17 +331,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function aiMove() {
-        var board = new GameBoard(circles);
-        var bestMove = minimax(board, 4, -Infinity, Infinity, true); // depth = 4
-        if (bestMove.column !== null) {
-            columnDrop = bestMove.column;
-            selectPlayer = 2; // AI is blue
-            drop();
-            checkWin();
-            if (win === 1) {
-                document.getElementById("output").innerText = "AI wins!";
+        var aiOn = document.getElementById("aiOn").value;
+        if (aiOn == 2) {
+
+        } else {
+            var board = new GameBoard(circles);
+            var bestMove = minimax(board, 4, -Infinity, Infinity, true); // depth = 4
+            if (bestMove.column !== null) {
+                columnDrop = bestMove.column;
+                selectPlayer = 2; // AI is blue
+                drop();
+                checkWin();
+                if (win === 1) {
+                    document.getElementById("output").innerText = "AI wins!";
+                }
             }
         }
+       
     }
     
     
