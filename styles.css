@@ -1,44 +1,85 @@
+/* Reset and base font */
 * {
     font-family: sans-serif;
-    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Full-screen body centered using flexbox */
+  body {
     background: lightskyblue;
-}
-
-canvas {
-    border: 1px black solid;
-    position: relative;
-    bottom: 100px;
-    left: 100px;
-    top: 10px;
-}
-
-
-
-
-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Container for all the content with a centered layout */
+  .container {
+    width: 90%;
+    max-width: 800px;
     background: white;
-    color: black;
-    left: 100px;
-}
-
-#coord {
-    position: relative;
-    left: 100px;
-    top:0px;
-}
-
-p {
-    position: relative;
-    left: 375px;
-    bottom: 55px;
-}
-
-#vert {
-    position: relative;
-    bottom:420px;
-}
-
-td {
-    padding: 22px;
-}
-
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  /* Bold heading */
+  h1 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* AI container styling */
+  .ai-container {
+    margin-bottom: 10px;
+  }
+  
+  /* Player selection container styling */
+  #playerSelectContainer {
+    margin-bottom: 20px;
+  }
+  
+  /* Clickable column table */
+  #coord {
+    width: 53%;
+    table-layout: fixed; /* Evenly distributes cell widths */
+    margin: 0 auto 20px auto;
+    border-collapse: collapse;
+  }
+  
+  #coord td {
+    padding: 20px;  /* Increase padding as needed */
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  
+  /* Style for the move information text */
+  .move-info {
+    margin-top: 10px;
+  }
+  
+  /* Center canvas and add border */
+  canvas {
+    border: 1px solid black;
+    display: block;
+    margin: 20px auto;
+  }
+  
+  /* Vertical coordinate table styling */
+  #vert {
+    margin: 0 auto 20px auto;
+    border-collapse: collapse;
+  }
+  
+  #vert td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  

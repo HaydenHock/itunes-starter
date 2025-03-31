@@ -1,82 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Circle Display</title>
-    <link href="styles.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>Connect 4 Board</title>
+  <link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
+  <div class="container">
     <h1>Connect 4 Board</h1>
     
-    
-    <div class="dropdown-container">
-        <label for="columnSelect">Select Column:</label>
-        <select id="columnSelect">
-            <option value="0">A</option>
-            <option value="1">B</option>
-            <option value="2">C</option>
-            <option value="3">D</option>
-            <option value="4">E</option>
-            <option value="5">F</option>
-            <option value="6">G</option>
-        </select>
-        
-
-
-        <label for="playerSelect"> Player:</label>
-        <select id="playerSelect">
-            <option value="1">A</option>
-            <option value="2">B</option>
-        </select>
-
-        <label for="aiOn"> AI:</label>
+    <div class="dropdown-row">
+      <div class="ai-container">
+        <label for="aiOn">AI:</label>
         <select id="aiOn">
-            <option value="1">On</option>
-            <option value="2">Off</option>
+          <option value="1">On</option>
+          <option value="2">Off</option>
         </select>
+      </div>
 
-        <button id="goButton">Go</button>
-        <span>Number of Moves: <span id="counter">0</span></span>
-        <span id="output"></span>
+      <!-- This player selection container will be visible only if AI is off -->
+      <div id="playerSelectContainer" style="display: none;">
+        <label for="playerSelect">Player:</label>
+        <select id="playerSelect">
+          <option value="1">Player 1</option>
+          <option value="2">Player 2</option>
+        </select>
+      </div>
     </div>
     
-
+    <!-- Clickable column labels -->
     <table id="coord">
-        <tr>
-            <td>A</td>
-            <td>B</td>
-            <td>C</td>
-            <td>D</td>
-            <td>E</td>
-            <td>F</td>
-            <td>G</td>
-        </tr>
+      <tr>
+        <td data-col="0">A</td>
+        <td data-col="1">B</td>
+        <td data-col="2">C</td>
+        <td data-col="3">D</td>
+        <td data-col="4">E</td>
+        <td data-col="5">F</td>
+        <td data-col="6">G</td>
+      </tr>
     </table>
 
     <canvas id="circleCanvas"></canvas>
 
-    <table id="vert">
-        <tr>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>6</td>
-        </tr>
-    </table>
 
-    
-    <script src="script.js"></script>
+    <div class="move-info">
+      <span>Number of Moves: <span id="counter">0</span></span>
+      <span id="output"></span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
