@@ -238,9 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function final() {
-    
-  }
   function checkWin() {
     function getValue(row, col) {
       if (row < 0 || row >= 6 || col < 0 || col >= 7) return null;
